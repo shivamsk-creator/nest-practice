@@ -13,7 +13,7 @@ export class Sessions {
     // @Prop({ type: String, default: null })
     // fcm_token: string
 
-    @Prop({ type: Number, default: moment().utc().valueOf() })
+    @Prop({ type: Number })
     created_at: number
 
     @Prop({ type: Number, default: null })
