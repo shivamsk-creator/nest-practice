@@ -5,7 +5,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { Users, UsersModel } from './schema/user.schema';
 import { Sessions, SessionsModel } from './schema/session.schema';
 import { CommonService } from 'src/common/common.service';
-import { CommonModule } from 'src/common/common.module';
+import { CommonModule } from '../common/common.module';
 
 @Module({
   imports: [
