@@ -1,21 +1,6 @@
-import {
-  Body,
-  Controller,
-  Get,
-  Post,
-  Put,
-  Req,
-  Request,
-  UseGuards,
-} from '@nestjs/common';
+import { Body, Controller, Delete, Get, Post, Put, Req, Request, UseGuards } from '@nestjs/common';
 import { AppService } from './app.service';
-import {
-  ApiBearerAuth,
-  ApiConsumes,
-  ApiOperation,
-  ApiResponse,
-  ApiTags,
-} from '@nestjs/swagger';
+import { ApiBearerAuth, ApiConsumes, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CreateUserDto, OtpDto, SignInDto } from './users/dto/create-user.dto';
 import { UsersService } from './users/users.service';
 import { AuthService } from './auth/auth.service';
@@ -41,18 +26,26 @@ export class AppController {
     return this.authService.signIn(body);
   }
 
-  @UseGuards(AuthGuard)
   @ApiBearerAuth('authentication')
+  @UseGuards(AuthGuard)
   @ApiOperation({ summary: 'verify email' })
   @ApiResponse({ status: 201, description: 'OK' })
   @ApiConsumes('application/json', 'application/x-www-form-urlencoded')
   @Put('verify-email')
   verifyEmail(@Body() body: OtpDto, @Req() req) {
-    return this.authService.verifyEmail(body, req.user);
+    return this.authService.verifyEmail(body, req.user)
   }
 
-  @Get()
-  getHello(): string {
-    return this.appService.getHello();
+
+  @UseGuards(AuthGuard)
+  @ApiBearerAuth('authentication')
+  @ApiOperation({ summary: 'logout', })
+  @ApiConsumes('application/json', 'application/x-www-form-urlencoded')
+  @Delete('/logout')
+  logOut(@Request() req) {
+    let tok = req?.headers?.authorization?.split(' ') ?? null
+    return this.authService.logOut(req.user.id, tok[1])
   }
+
+
 }
