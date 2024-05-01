@@ -4,10 +4,10 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Users } from './schema/user.schema';
-import { CommonService } from 'src/common/common.service';
 import moment from 'moment';
 import { JwtService } from '@nestjs/jwt';
 import { Sessions } from './schema/session.schema';
+import { CommonService } from '../common/common.service';
 
 @Injectable()
 export class UsersService {
