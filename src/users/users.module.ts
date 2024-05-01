@@ -14,6 +14,5 @@ import { CommonModule } from 'src/common/common.module';
   ],
   controllers: [UsersController],
   providers: [UsersService, CommonService],
-  exports: [UsersService]
 })
 export class UsersModule { }
