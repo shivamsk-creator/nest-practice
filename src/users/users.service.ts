@@ -32,6 +32,8 @@ export class UsersService {
       if (existPhone) {
         throw new HttpException({ error_description: "This phone no. is already exist! Please use another phone no.", error_code: 'PHONE_ALREADY_EXIST' }, HttpStatus.BAD_REQUEST);
       }
+      console.log("hello");
+
       let otp = await this.common.generateOtp()
       let hash = await this.common.encriptPass(body.password)
 
