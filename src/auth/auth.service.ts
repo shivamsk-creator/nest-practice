@@ -93,5 +93,16 @@ export class AuthService {
         }
     }
 
+    async logOut(id: string, token: string) {
+        try {
+            await this.session.deleteMany({ user_id: id, access_token: token })
+            throw new HttpException({ message: 'Log Out Successfully' }, HttpStatus.OK)
+        } catch (error) {
+            console.log(error);
+            throw error
+        }
+
+    }
+
 
 }
